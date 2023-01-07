@@ -109,6 +109,7 @@ captured: false }
 db.bounties.find({reward:{$gte:1000}}, {name: 1})
 
 // 3. Query for all bounties, but exclude the client attribute from being shown
+db.bounties.find({}, {client: 0})
 
 // 4. Query for a Groundhog in the Woodlands
 db.bounties.find({ $and: [ { species: "Groundhog" }, { location: "Woodlands" } ] })
@@ -125,3 +126,7 @@ db.bounties.deleteOne({name: "Lokinkajou"})
 db.bounties.deleteMany({client: "Songbird"})
 
 // 4. Update all captured statuses to true
+db.bounties.updateMany(
+  {captured: false}, 
+  {$set: {captured: true}}
+  )
